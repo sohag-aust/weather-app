@@ -1,0 +1,5 @@
+.backImage {
+    background-image: url('/assets/images/bg-image.jpg');
+    background-repeat: no-repeat;
+    height: 800px;
+}

@@ -1,0 +1,19 @@
+<div class="container" *ngIf="viewWeatherData">
+    <div class="text-white text-center">
+        <img id="weather-icon" src="http://openweathermap.org/img/wn/{{viewWeatherData.icon}}@2x.png" alt="">
+        <h1 id="city"><strong style="color: #746bf3;"> {{viewWeatherData.name}} </strong></h1>
+        <h3><span style="color: crimson;" id="temperature"><strong> {{viewWeatherData.temp}} </strong>&deg;C</span></h3>
+        <h1 id="condition" class="lead"><strong style="color: #b4d9c8; font-weight: bold;"> {{viewWeatherData.main}} </strong></h1>
+        
+        <button (click)="getForecast(viewWeatherData.name)" type="button" class="btn btn-info mt-2" [ngClass]="{'btn-danger': preview === true}"> <strong> {{preview ? 'Hide' : 'Show'}} Forecast </strong> </button>
+    </div>
+
+    <!-- <p>ForeCast Data : {{foreCastData.list[0] | json}}</p> -->
+
+    <div *ngIf="preview">
+        <future-forecast [foreCastDataList]="foreCastData.list">
+
+        </future-forecast>
+    </div>
+    
+</div>
