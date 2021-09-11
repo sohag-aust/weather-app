@@ -25,6 +25,9 @@ import { RouterModule, Routes } from '@angular/router';
 // font awesome
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
+// pagination
+import { NgxPaginationModule } from 'ngx-pagination';
+
 const appRoutes: Routes = [
   {path: 'show-forecast', component: FutureComponent}
 ]; 
@@ -43,7 +46,8 @@ const appRoutes: Routes = [
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot(appRoutes),
-    FontAwesomeModule
+    FontAwesomeModule,
+    NgxPaginationModule
   ],
   providers: [ForecastService],
   bootstrap: [AppComponent]

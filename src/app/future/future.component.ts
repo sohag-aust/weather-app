@@ -11,6 +11,12 @@ export class FutureComponent implements OnInit {
   @Input()
   foreCastDataList: any;
 
+  // for pagination
+  @Input()
+  totalRecords!: number;
+  page: number = 1;
+
+  // font-awesome
   calendar:any = faCalendar;
   clock:any = faClock;
 

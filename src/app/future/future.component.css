@@ -8,6 +8,10 @@
     grid-column-gap: 1em;
 }
 
+.item {
+    align-items: center;
+}
+
 .fontAwesome {
     font-size: 22px;
 }

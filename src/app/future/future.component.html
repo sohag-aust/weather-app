@@ -1,4 +1,4 @@
-<div class="wrapper" >
+<!-- <div class="wrapper" >
     <div class="item text-center" *ngFor="let forecast of foreCastDataList; let i = index" >
         <ng-container *ngIf="i<4">
             <img id="weather-icon" src="http://openweathermap.org/img/wn/{{forecast.weather[0].icon}}@2x.png" alt="image missing">
@@ -8,4 +8,23 @@
             <h1 id="condition" class="lead"><strong style="color: rgb(232, 240, 234); font-weight: bold;"> {{forecast.weather[0].main}} </strong></h1>
         </ng-container>
     </div>
+</div> -->
+
+<div class="wrapper bg-info mt-4" >
+    <div class="text-center" *ngFor="let forecast of foreCastDataList | paginate: { itemsPerPage: 4, currentPage: page, totalItems: totalRecords }; let i = index" >
+        <!-- <ng-container *ngIf="i<4"> -->
+            <div class="item">
+                <img id="weather-icon" src="http://openweathermap.org/img/wn/{{forecast.weather[0].icon}}@2x.png" alt="image missing">
+                <h4 id="date"><fa-icon class="fontAwesome" [icon]="calendar"></fa-icon><strong style="color: white;"> {{forecast.dt_txt | date}} </strong></h4>
+                <h5 id="time"><fa-icon class="fontAwesome" [icon]="clock"></fa-icon><strong style="color: #8aad08;"> {{forecast.dt_txt | date:'shortTime'}} </strong></h5>
+                <h3><span style="color: crimson;" id="temperature"><strong> {{forecast.main.temp}} </strong>&deg;C</span></h3>
+                <h1 id="condition" class="lead"><strong style="color: rgb(232, 240, 234); font-weight: bold;"> {{forecast.weather[0].main}} </strong></h1>
+            </div>
+        <!-- </ng-container> -->
+    </div>
+</div>
+
+<!-- pagination -->
+<div class="text-center mt-4" style="background-color: rgba(253, 31, 124, 0.767);"> 
+    <pagination-controls (pageChange)="page = $event" style="font-size: 20px;"></pagination-controls>
 </div>

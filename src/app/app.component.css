@@ -1,5 +1,7 @@
 .backImage {
-    background-image: url('/assets/images/bg-image.jpg');
+    /* background-image: url('/assets/images/bg-image.jpg');
     background-repeat: no-repeat;
-    height: 800px;
+    height: 800px; */
+    background-color: rgb(145, 247, 213);
+    height: 1000px;
 }
