@@ -17,7 +17,7 @@ import { ForecastService } from './services/forecast.service';
 import { HttpClientModule } from '@angular/common/http';
 
 // FormsModule added for two-way databinding
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // adding routes
 import { RouterModule, Routes } from '@angular/router';
@@ -42,6 +42,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     FontAwesomeModule,
     NgxPaginationModule
   ],

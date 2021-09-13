@@ -1,10 +1,11 @@
 <div class="container">
-    <form class="col-md-6 m-auto py-5 custom">
+    <form class="col-md-6 m-auto mt-5 py-5 custom" [formGroup]="reactiveForm" (ngSubmit)="getData()">
         <div class="input-group mb-3">
-            <input required id="city-name" name="aa" type="text" class="form-control" placeholder="Enter a location for Weather ... e.g: dhaka" 
-                    [(ngModel)]="cityName" #cityControl="ngModel">
+            <input required id="city-name" type="text" class="form-control" placeholder="Enter a location for Weather ... e.g: dhaka" 
+                    formControlName="cityName">
+                    
             <div class="input-group-append">
-                <button (click)="getData(cityName)" type="button" class="btn btn-danger" [disabled]="cityControl.pristine">Search</button>
+                <button type="submit" class="btn btn-danger" [disabled]="reactiveForm.pristine">Search</button>
             </div>
         </div>
     </form>
