@@ -1,1 +1,44 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* appComponent css */
+.backImage {
+    background-color: rgb(145, 247, 213);
+    height: 1000px;
+}
+
+/* futureComponent css */
+
+.wrapper {
+    margin-left: 1em;
+    margin-right: 1em;
+    display: grid;
+    grid-template-rows: auto;
+    grid-template-columns: repeat(4, 1fr);
+    grid-row-gap: 1em;
+    grid-column-gap: 1em;
+}
+
+.item {
+    align-items: center;
+}
+
+.item__date {
+    color: white;
+}
+
+.item__time {
+    color: #e9c707;
+}
+
+.item__temperature {
+    color: crimson;
+}
+
+.item__condition {
+    color: rgb(232, 240, 234); 
+    font-weight: bold;
+}
+
+.item__fontAwesome {
+    font-size: 22px;
+}
