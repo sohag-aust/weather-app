@@ -14,10 +14,15 @@ export class FutureComponent implements OnInit {
   // for pagination
   @Input()
   totalRecords!: number;
+
+  /** @internal */
   page: number = 1;
 
   // font-awesome
+  /** @internal */
   calendar:any = faCalendar;
+  
+  /** @internal */
   clock:any = faClock;
 
   constructor() { }
