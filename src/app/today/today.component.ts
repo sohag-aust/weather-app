@@ -4,6 +4,9 @@ import { IWeather } from '../model/weather';
 import { WeatherData } from '../model/weatherData';
 import { ForecastService } from '../services/forecast.service';
 
+// notification service 
+import { NotificationsService } from 'angular2-notifications';
+
 @Component({
   selector: 'app-today',
   templateUrl: './today.component.html',
@@ -11,7 +14,9 @@ import { ForecastService } from '../services/forecast.service';
 })
 export class TodayComponent implements OnInit {
 
-  constructor(private _forecastService:ForecastService) { }
+  constructor(private _forecastService:ForecastService, 
+              private _notificationService: NotificationsService
+  ) { }
 
   ngOnInit(): void {
     this.reactiveForm = new FormGroup({
@@ -41,17 +46,44 @@ export class TodayComponent implements OnInit {
                                 name,temp,main,icon
                               };
 
-                              this.noResultFound = false;
+                              // success notification poped up
+                              this.onSuccessNotification();
                             } ,
                             (error) => {
                               console.log(error);
-                              this.noResultFound = true;
+
+                              // error notification poped up
+                              this.onErrorNotification();
                             }
                           );
                           
     // reset form value
     this.reactiveForm.reset({
       'cityName': '',
+    });
+  }
+
+  onErrorNotification(): void {
+    this.noResultFound = true;
+
+    this._notificationService.error('Error', 'Server Error', {
+      position: ['bottom', 'right'],
+      timOut: 2000,
+      animate: 'fade',
+      showProgressBar: true,
+      clickToClose: true
+    });
+  }
+
+  onSuccessNotification(): void {
+    this.noResultFound = false;
+
+    this._notificationService.success('<p style="color: white;"><strong>Success</strong></p>', `<p style="color: white;"><strong>Today's weather detects !!</strong></p>`, {
+      position: ['bottom', 'right'],
+      timOut: 2000,
+      animate: 'fade',
+      showProgressBar: true,
+      clickToClose: true
     });
   }
 }

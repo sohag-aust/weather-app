@@ -1,8 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { IWeather } from '../model/weather';
-import { map } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
 import { IForecast } from '../model/forecast';
 
 @Injectable({
@@ -23,7 +23,8 @@ export class ForecastService {
     
     return this.http.get<IWeather>(this.URL)
                     .pipe(
-                      map( ({name, main, weather}) => ({name, main, weather}) )
+                      map( ({name, main, weather}) => ({name, main, weather}) ),
+                      catchError(this.errorHandler)
                     );
   }
 
@@ -32,7 +33,13 @@ export class ForecastService {
     
     return this.http.get<IForecast>(this.URL)
                     .pipe(
-                      map( ({list}) => ({list}) )
+                      map( ({list}) => ({list}) ),
+                      catchError(this.errorHandler)
                     );
+  }
+
+  errorHandler(error: HttpErrorResponse) {
+    console.log('Error catched !!');
+    return throwError(error.message || "server error.");
   }
 }

@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // my components
@@ -28,6 +29,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 // pagination
 import { NgxPaginationModule } from 'ngx-pagination';
 
+// angular2 notifications
+import { SimpleNotificationsModule } from 'angular2-notifications';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,7 +48,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     FormsModule,
     ReactiveFormsModule,
     FontAwesomeModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    SimpleNotificationsModule.forRoot()
   ],
   providers: [ForecastService],
   bootstrap: [AppComponent]
