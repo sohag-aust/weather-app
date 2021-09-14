@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { IWeather } from '../model/weather';
+import { WeatherData } from '../model/weatherData';
 import { ForecastService } from '../services/forecast.service';
 
 @Component({
@@ -10,7 +11,7 @@ import { ForecastService } from '../services/forecast.service';
 export class ViewWeatherComponent implements OnInit {
 
   @Input()
-  viewWeatherData!: IWeather;
+  viewWeatherData!: WeatherData;
 
   // @Input()
   // viewWeatherData: any;
@@ -23,10 +24,12 @@ export class ViewWeatherComponent implements OnInit {
   }
 
   foreCastData: any;
-  
+
   getForecast(city: string): any {
     this._forecastService.getForeCastData(city)
-                          .subscribe(data => this.foreCastData = data);
+                          .subscribe(data => {
+                            this.foreCastData = data;
+                          });
     this.preview = !this.preview;
   }
 }

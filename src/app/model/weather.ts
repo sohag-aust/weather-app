@@ -1,6 +1,12 @@
 export interface IWeather {
     name: string;
-    temp: number;
-    icon: string;
-    main: string;
+    main: {
+        temp: number
+    };
+    weather: [
+        {
+            main: string, 
+            icon: string
+        }
+    ];
 }

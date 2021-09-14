@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { IWeather } from '../model/weather';
+import { WeatherData } from '../model/weatherData';
 import { ForecastService } from '../services/forecast.service';
 
 @Component({
@@ -20,40 +21,34 @@ export class TodayComponent implements OnInit {
 
   reactiveForm!: FormGroup;
 
-  weatherData!: any;
+  weather!: WeatherData;
   noResultFound: boolean = false;
-  weather!: IWeather;
   
   getData(): void{
     const city = this.reactiveForm.value.cityName;
     
     this._forecastService.getWeatherData(city)
                           .subscribe(
-                            (data) => {
+                            (data: IWeather) => {
+                              console.log('data received : ');
                               console.log(data);
-                              
-                              this.weatherData = data
-                              this.noResultFound = false;
 
                               const {name} = data;
                               const {temp} = data.main;
-                              const {icon,main} = data.weather[0];
+                              const {main, icon} = data.weather[0];
 
                               this.weather = {
-                                name: name,
-                                temp: temp,
-                                icon: icon,
-                                main: main
-                              }
+                                name,temp,main,icon
+                              };
 
-                              console.log(this.weather);
+                              this.noResultFound = false;
                             } ,
                             (error) => {
-                              // console.log(error);
+                              console.log(error);
                               this.noResultFound = true;
                             }
                           );
-    
+                          
     // reset form value
     this.reactiveForm.reset({
       'cityName': '',
