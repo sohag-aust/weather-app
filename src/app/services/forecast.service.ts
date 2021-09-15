@@ -4,24 +4,24 @@ import { Observable, throwError } from 'rxjs';
 import { IWeather } from '../model/weather';
 import { map, catchError } from 'rxjs/operators';
 import { IForecast } from '../model/forecast';
+import { AppConfigService } from './AppConfigService';
+import { WeatherConfig } from '../model/AppConfigData';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ForecastService {
 
-  private API_KEY: string = '46ad7457603b9b0104e633e78cd60e16';
-  private weatherUrl: string = 'https://api.openweathermap.org/data/2.5/';
-  private cnt: number = 16;
-  
-  private URL!: string;
+  private weatherConfig: WeatherConfig;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private appConfigService: AppConfigService) { 
+    this.weatherConfig = appConfigService.config.weather_api;
+  }
 
   getWeatherData(city: string): Observable<IWeather> {
-    this.URL = `${this.weatherUrl}weather?q=${city}&appid=${this.API_KEY}&units=metric`;
+    const URL = `${this.weatherConfig.url}/weather?q=${city}&appid=${this.weatherConfig.api_key}&units=metric`;
     
-    return this.http.get<IWeather>(this.URL)
+    return this.http.get<IWeather>(URL)
                     .pipe(
                       map( ({name, main, weather}) => ({name, main, weather}) ),
                       catchError(this.errorHandler)
@@ -29,9 +29,9 @@ export class ForecastService {
   }
 
   getForeCastData(city: string): Observable<IForecast> {
-    this.URL = `${this.weatherUrl}forecast?q=${city}&cnt=${this.cnt}&appid=${this.API_KEY}&units=metric`;
+    const URL = `${this.weatherConfig.url}/forecast?q=${city}&cnt=${this.weatherConfig.cnt}&appid=${this.weatherConfig.api_key}&units=metric`;
     
-    return this.http.get<IForecast>(this.URL)
+    return this.http.get<IForecast>(URL)
                     .pipe(
                       map( ({list}) => ({list}) ),
                       catchError(this.errorHandler)
