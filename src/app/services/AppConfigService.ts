@@ -16,14 +16,16 @@ export class AppConfigService {
     }
 
     Init() {
+        console.log('Init is called');
         return this.http.get<AppConfigData>(environment.config)
                         .pipe(
-                            tap( (config) => this.appConfigData = config ),
+                            tap( (conf) => this.appConfigData = conf ),
                         )
                         .toPromise();
     }
 
     get config(): AppConfigData {
+        console.log('config method is called !!');
         return this.appConfigData;
     }
 }

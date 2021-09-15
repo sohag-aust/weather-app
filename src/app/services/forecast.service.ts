@@ -19,7 +19,7 @@ export class ForecastService {
   }
 
   getWeatherData(city: string): Observable<IWeather> {
-    const URL = `${this.weatherConfig.url}/weather?q=${city}&appid=${this.weatherConfig.api_key}&units=metric`;
+    const URL = `${this.weatherConfig.url}/weather?q=${city}`;
     
     return this.http.get<IWeather>(URL)
                     .pipe(
@@ -29,7 +29,7 @@ export class ForecastService {
   }
 
   getForeCastData(city: string): Observable<IForecast> {
-    const URL = `${this.weatherConfig.url}/forecast?q=${city}&cnt=${this.weatherConfig.cnt}&appid=${this.weatherConfig.api_key}&units=metric`;
+    const URL = `${this.weatherConfig.url}/forecast?q=${city}&cnt=${this.weatherConfig.cnt}`;
     
     return this.http.get<IForecast>(URL)
                     .pipe(

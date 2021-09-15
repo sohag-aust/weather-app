@@ -15,7 +15,7 @@ import { ViewWeatherComponent } from './view-weather/view-weather.component';
 import { ForecastService } from './services/forecast.service';
 
 // httpClient Module
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 // FormsModule added for two-way databinding
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -32,6 +32,9 @@ import { NgxPaginationModule } from 'ngx-pagination';
 // angular2 notifications
 import { SimpleNotificationsModule } from 'angular2-notifications';
 import { AppConfigService } from './services/AppConfigService';
+
+// interceptorService
+import { InterceptorService } from './services/InterceptorService';
 
 const appConfigFactory = (appConfigService: AppConfigService) => {
   return ()=>appConfigService.Init();
@@ -54,7 +57,7 @@ const appConfigFactory = (appConfigService: AppConfigService) => {
     ReactiveFormsModule,
     FontAwesomeModule,
     NgxPaginationModule,
-    SimpleNotificationsModule.forRoot()
+    SimpleNotificationsModule.forRoot(),
   ],
   providers: [
     {
@@ -63,8 +66,14 @@ const appConfigFactory = (appConfigService: AppConfigService) => {
       deps: [AppConfigService],
       multi: true
     },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: InterceptorService,
+      multi: true
+    },
     ForecastService,
-    AppConfigService
+    AppConfigService,
+    InterceptorService
   ],
   bootstrap: [AppComponent]
 })
