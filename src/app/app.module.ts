@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule, routingComponents } from './app-routing.module';
@@ -31,6 +31,11 @@ import { NgxPaginationModule } from 'ngx-pagination';
 
 // angular2 notifications
 import { SimpleNotificationsModule } from 'angular2-notifications';
+import { AppConfigService } from './services/AppConfigService';
+
+const appConfigFactory = (appConfigService: AppConfigService) => {
+  return ()=>appConfigService.Init();
+}
 
 @NgModule({
   declarations: [
@@ -51,7 +56,17 @@ import { SimpleNotificationsModule } from 'angular2-notifications';
     NgxPaginationModule,
     SimpleNotificationsModule.forRoot()
   ],
-  providers: [ForecastService],
+  providers: [
+    {
+      provide: APP_INITIALIZER,
+      useFactory: appConfigFactory,
+      deps: [AppConfigService],
+      multi: true
+    },
+    ForecastService,
+    AppConfigService
+  ],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }
