@@ -31,7 +31,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 
 // angular2 notifications
 import { SimpleNotificationsModule } from 'angular2-notifications';
-import { AppConfigService } from './services/AppConfigService';
+import { AppConfigService } from './services/app-config.service';
 
 const appConfigFactory = (appConfigService: AppConfigService) => {
   return ()=>appConfigService.Init();

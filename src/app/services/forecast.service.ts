@@ -4,8 +4,8 @@ import { Observable, throwError } from 'rxjs';
 import { IWeather } from '../model/weather';
 import { map, catchError } from 'rxjs/operators';
 import { IForecast } from '../model/forecast';
-import { AppConfigService } from './AppConfigService';
 import { WeatherConfig } from '../model/AppConfigData';
+import { AppConfigService } from './app-config.service';
 
 @Injectable({
   providedIn: 'root'
